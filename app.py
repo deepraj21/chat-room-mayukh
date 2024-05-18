@@ -6,7 +6,7 @@ from flask_socketio import SocketIO, join_room, leave_room, send, emit
 from flask_sqlalchemy import SQLAlchemy
 import uuid
 from datetime import datetime
-# import gunicorn
+import gunicorn
 
 
 app = Flask(__name__)
