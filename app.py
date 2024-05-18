@@ -1,19 +1,19 @@
-from gevent import monkey
-monkey.patch_all()
+# from gevent import monkey
+# monkey.patch_all()
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_socketio import SocketIO, join_room, leave_room, send, emit
 from flask_sqlalchemy import SQLAlchemy
 import uuid
 from datetime import datetime
-import gunicorn
+# import gunicorn
 
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chat.db'
 db = SQLAlchemy(app)
-socketio = SocketIO(app, async_mode='gevent')  # Use gevent as async mode
+socketio = SocketIO(app)  # Use gevent as async mode
 
 # In-memory storage for simplicity
 questions = {}
@@ -130,4 +130,5 @@ def handle_message(data):
     db.session.commit()
     send({'msg': msg, 'username': username, 'timestamp': timestamp}, to=question_id)
 
-
+# if __name__ == '__main__':
+#     socketio.run(app, debug=True)
